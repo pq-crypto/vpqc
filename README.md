@@ -1,2 +1,2 @@
 # vpqc
-processor for post-quantum cryptography
+vector processor for Ring-LWE and Module-LWE schemes in post-quantum cryptography
