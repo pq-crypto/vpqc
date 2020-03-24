@@ -4,23 +4,29 @@ and it is implemented using Chisel, an agile hardware construction language deve
 The instruction set of the processor is based on the customized extension of RISC-V, so it could
 be served as a coprocessor for RISC-V cores. The customed instructions are defined as follows.
 
-| **Instruction \ Bit field** | **31 : 25** | **24 : 20** | **19 : 15** | **14 : 12** | **11 : 7** |  **6 : 0**  | **Description**                             |
+| **Instr \ Bit field** | **31:25** | **24:20** | **19:15** | **14:12** | **11:7** |  **6:0**  | **Description**                             |
 | ----------------------- | :-----: | :-----: | :-----: | :-----: | :----: | :-----: | :-------------------------------------: |
-| fetchData               | 0000000 | -       | -       | -       | vd     | 0001000 | v[vd] <- random data from prefetch FIFO |
-| binomial sampling       | 0000001 | vs2     | vs1     | -       | vd     | 0001000 | v[vd] <- vector binomial sample (v[vs1],v[vs2]) |
-| rejection sampling      | 0000010 | vs2     | vs1     | -       | vd     | 0001000 | v[vd] <- vector rejection sample (v[vs1],v[vs2]) |
-| DIT butterfly           | 0000011 | vs2     | vs1     | -       | -      | 0001000 | (v[vs1], v[vs2]) <- vector DIT butterfly (v[vs1], v[vs2]) |
-| DIF butterfly           | 0000100 | vs2     | vs1     | -       | -      | 0001000 | (v[vs1], v[vs2]) <- vector DIF butterfly (v[vs1], v[vs2]) |
-| csrrw                   | 0000101 | csridx  | vs1     | -       | -      | 0001000 | swap value (csr[csridx], r[vs1]) |
-| csrrwi                  | 0000110 | csridx  | imm     | -       | -      | 0001000 | csr[csridx] <- imm |
-| vld                     | 0000111 | -       | -       | -       | vd     | 0001000 | v[vd] <- memory (addr) |
-| vst                     | 0001000 | -       | vs1     | -       | -      | 0001000 | memory (addr) <- v[vs1] |
-| vadd                    | 0001001 | vs2     | vs1     | -       | vd     | 0001000 | v[vd] <- vector addition (v[vs1], v[vs2]) |
-| vsub                    | 0001010 | vs2     | vs1     | -       | vd     | 0001000 | v[vd] <- vector subtraction (v[vs1], v[vs2]) |
-| vmul                    | 0001011 | vs2     | vs1     | -       | vd     | 0001000 | v[vd] <- vector multiplication (v[vs1], v[vs2]) |
+| fetchData               | 0000000 | -       | -       | -       | vd     | 0001011 | v[vd] <- random data from prefetch FIFO |
+| binomial sampling       | 0000001 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector binomial sample (v[vs1],v[vs2]) |
+| rejection sampling      | 0000010 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector rejection sample (v[vs1],v[vs2]) |
+| DIT butterfly           | 0000011 | vs2     | vs1     | -       | -      | 0001011 | (v[vs1], v[vs2]) <- vector DIT butterfly (v[vs1], v[vs2]) |
+| DIF butterfly           | 0000100 | vs2     | vs1     | -       | -      | 0001011 | (v[vs1], v[vs2]) <- vector DIF butterfly (v[vs1], v[vs2]) |
+| csrrw                   | 0000101 | csridx  | vs1     | -       | -      | 0001011 | swap value (csr[csridx], r[vs1]) |
+| csrrwi                  | 0000110 | csridx  | imm     | -       | -      | 0001011 | csr[csridx] <- imm |
+| vld                     | 0000111 | -       | -       | -       | vd     | 0001011 | v[vd] <- memory (addr) |
+| vst                     | 0001000 | -       | vs1     | -       | -      | 0001011 | memory (addr) <- v[vs1] |
+| vadd                    | 0001001 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector addition (v[vs1], v[vs2]) |
+| vsub                    | 0001010 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector subtraction (v[vs1], v[vs2]) |
+| vmul                    | 0001011 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector multiplication (v[vs1], v[vs2]) |
 
+This project follows the style of file organizations in *sbt* (scala build tools), see
+https://www.scala-sbt.org/ for more information about *sbt*.
+
+The source codes are located in */src/main/scala/* and the test codes are located in */src/test/scala/VPQC/*.
 
 #### performance of NTT and sampling process
+[IntelliJ IDEA](https://www.jetbrains.com/idea/) is a powerful IDE for scala, and it is quite convenient to use IntelliJ IDEA to build this project.
+
 Run the object *TestTopTestSimple* in */src/test/scala/VPQC/procTest*, and the result shows:
 
 When the dimension = 256, binomial/rejection sampling can be finished in 411 cycles and
