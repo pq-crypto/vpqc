@@ -307,6 +307,7 @@ class ProcTest(c: PQCCoprocessor) extends PeekPokeTester(c)
     poke(c.io.instr.rs1, i)
     step(1)
     for (j <- 0 until 32) {
+      expect(c.io.vectorOut(j), s(32 * i + j))
       nttRes(32 * i + j) = peek(c.io.vectorOut(j)).toInt
     }
   }
