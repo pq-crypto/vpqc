@@ -12,7 +12,7 @@ be served as a coprocessor for RISC-V cores. The customed instructions are defin
 | DIT butterfly           | 0000011 | vs2     | vs1     | -       | -      | 0001011 | (v[vs1], v[vs2]) <- vector DIT butterfly (v[vs1], v[vs2]) |
 | DIF butterfly           | 0000100 | vs2     | vs1     | -       | -      | 0001011 | (v[vs1], v[vs2]) <- vector DIF butterfly (v[vs1], v[vs2]) |
 | csrrw                   | 0000101 | csridx  | vs1     | -       | -      | 0001011 | swap value (csr[csridx], r[vs1]) |
-| csrrwi                  | 0000110 | csridx  | imm     | -       | -      | 0001011 | csr[csridx] <- imm |
+| csrrwi                  | 0000110 | csridx  | imm[9:5]     | -       | imm[4:0]      | 0001011 | csr[csridx] <- imm |
 | vld                     | 0000111 | -       | -       | -       | vd     | 0001011 | v[vd] <- memory (addr) |
 | vst                     | 0001000 | -       | vs1     | -       | -      | 0001011 | memory (addr) <- v[vs1] |
 | vadd                    | 0001001 | vs2     | vs1     | -       | vd     | 0001011 | v[vd] <- vector addition (v[vs1], v[vs2]) |
